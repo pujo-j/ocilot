@@ -46,6 +46,10 @@ var ocisys = []lua.RegistryFunction{
 
 	{"shellExec", LuaShellExec},
 	{"shellString", LuaShellString},
+
+	{"hash", LuaHash},
+	{"read", LuaRead},
+	{"write", LuaWrite},
 }
 
 func OciSysOpen(l *lua.State) int {

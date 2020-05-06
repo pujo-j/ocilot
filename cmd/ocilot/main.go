@@ -104,7 +104,7 @@ var rootCmd = &cobra.Command{
 			defer func() {
 				_ = f.Close()
 			}()
-			err = l.Load(f, "-", "text")
+			err = l.Load(f, scriptName, "text")
 			if err != nil {
 				log.With("error", err).Error("loading lua script")
 				return err
