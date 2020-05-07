@@ -8,7 +8,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/google/go-containerregistry v0.0.0-20200429183624-984e0aae525c
 	github.com/markbates/pkger v0.15.1
-	github.com/pujo-j/luabox v0.2.0
+	github.com/pujo-j/luabox v0.2.1
 	github.com/spf13/cobra v0.0.5
 	go.uber.org/zap v1.15.0
 )

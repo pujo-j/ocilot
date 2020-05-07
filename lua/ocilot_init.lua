@@ -1,4 +1,5 @@
 local log = require("log")
+local box=require("luabox")
 
 -- Layer
 
@@ -163,3 +164,5 @@ applyCached = function(to_image, cache_url, cache_key, buildlayers)
     end
 end
 
+env=box.getEnv()
+args=box.getArgs()
