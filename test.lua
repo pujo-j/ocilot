@@ -1,6 +1,7 @@
 local log = require("log")
 
-local source = "docker://localhost:5000/alpine:3"
+--local source = "docker://localhost:5000/alpine:3"
+local source = "docker.pkg.github.com/pujo-j/ocilot-builders/python-base:latest"
 local destination = "docker://localhost:5000/test:latest"
 local cachePrefix = "localhost:5000/cache/"
 

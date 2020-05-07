@@ -20,9 +20,11 @@ package ocilot
 import (
 	"encoding/json"
 	"github.com/docker/docker/client"
+	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/daemon"
+	"github.com/google/go-containerregistry/pkg/v1/google"
 	"github.com/google/go-containerregistry/pkg/v1/mutate"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 	"strings"
@@ -33,6 +35,8 @@ type Image struct {
 	img      v1.Image
 	isDocker bool
 }
+
+var keyChain = authn.NewMultiKeychain(authn.DefaultKeychain, google.Keychain)
 
 func LoadImage(imageName string) (*Image, error) {
 	if strings.HasPrefix(imageName, "docker://") {
@@ -58,7 +62,7 @@ func LoadImage(imageName string) (*Image, error) {
 		if err != nil {
 			return nil, err
 		}
-		descriptor, err := remote.Get(reference)
+		descriptor, err := remote.Get(reference, remote.WithAuthFromKeychain(keyChain))
 		if err != nil {
 			return nil, err
 		}
@@ -109,7 +113,7 @@ func (i *Image) Push() error {
 		_, err = daemon.Write(tag, i.img)
 		return err
 	} else {
-		return remote.Write(i.ref, i.img)
+		return remote.Write(i.ref, i.img, remote.WithAuthFromKeychain(keyChain))
 	}
 }
 
