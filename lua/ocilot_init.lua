@@ -79,8 +79,8 @@ imagemt.config = function(this)
     return ocisys.imageGetConfig(this._ud)
 end
 
-imagemt.setConfig = function(this)
-    ocisys.imageSetConfig(this._ud)
+imagemt.setConfig = function(this,config)
+    ocisys.imageSetConfig(this._ud,config)
 end
 
 imagemt.layers = function(this)

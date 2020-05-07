@@ -90,7 +90,20 @@ func LuaImageGetConfig(l *lua.State) int {
 		l.Error()
 		return 0
 	}
-	luabox.DeepPush(l, config)
+	bytes, err := json.Marshal(config)
+	if err != nil {
+		l.PushString(err.Error())
+		l.Error()
+		return 0
+	}
+	res := make(map[string]interface{})
+	err = json.Unmarshal(bytes, &res)
+	if err != nil {
+		l.PushString(err.Error())
+		l.Error()
+		return 0
+	}
+	luabox.DeepPush(l, res)
 	return 1
 }
 

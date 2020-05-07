@@ -16,5 +16,12 @@ applyCached(new, cachePrefix, "test:snapshot1", function()
     return { layer }
 end)
 
+local config = new:config()
+local e = config["Env"]
+e[#e] = 'TEST=TEST_ENV_VAR'
+log.info("Applying config", { config = config })
+new:setConfig(config)
+
 log.info("Pushing image", { destination = destination })
 new:push()
+
